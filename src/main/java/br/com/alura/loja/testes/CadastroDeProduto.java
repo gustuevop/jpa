@@ -19,18 +19,16 @@ public class CadastroDeProduto {
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		
 		Produto p = produtoDao.buscarPorId(1l);
-		System.out.println(p.getPreco());
+
+		List<Produto> produtos = produtoDao.buscarProdutosPorParametros("Motorola", null, null);
+		produtos.forEach(System.out::println);
 		
-		List<Produto> todos = produtoDao.buscarPorNomeDaCategoria("CELULARES");
-		todos.forEach(p2 -> System.out.println(p.getNome()));
-	
-		BigDecimal precoDoProduto = produtoDao.buscarPrecoDoProdutoComNome("Xiaomi Redmi");
-		System.out.println("Preco do Produto: " +precoDoProduto);
 	}
 
 	private static void cadastrarProduto() {
 		Categoria celulares = new Categoria("CELULARES");
 		Produto celular = new Produto("Xiaomi Redmi", "Muito legal", new BigDecimal("800"), celulares );
+		Produto pc = new Produto("Motorola", "Moto G8", new BigDecimal("1200"), celulares );
 		
 		EntityManager em = JPAUtil.getEntityManager();
 		ProdutoDao produtoDao = new ProdutoDao(em);
@@ -40,6 +38,7 @@ public class CadastroDeProduto {
 		
 		categoriaDao.cadastrar(celulares);
 		produtoDao.cadastrar(celular);
+		produtoDao.cadastrar(pc);
 		
 		em.getTransaction().commit();
 		em.close();

@@ -22,25 +22,12 @@ public class CadastroDePedido {
 	public static void main(String[] args) {
 		popularBancoDeDados();
 		EntityManager em = JPAUtil.getEntityManager();
-		ProdutoDao produtoDao = new ProdutoDao(em);
-		ClienteDao clienteDao = new ClienteDao(em);
+		PedidoDao pedDao = new PedidoDao(em);
+		Pedido pedido = pedDao.buscarPedidoComCliente(1l);
 		
-		Produto produto = produtoDao.buscarPorId(1l);
-		Cliente cliente = clienteDao.buscarPorId(1l);
+		em.close();
 		
-		em.getTransaction().begin();
-		
-		Pedido pedido = new Pedido(cliente);
-		pedido.adicionarItem(new ItemPedido(10, pedido, produto));
-		pedido.adicionarItem(new ItemPedido(2, pedido, produto));
-		
-		PedidoDao pedidoDao = new PedidoDao(em);
-		pedidoDao.cadastrar(pedido);
-		
-		em.getTransaction().commit();
-		
-		List<RelatorioDeVendasVo> relatorio = pedidoDao.relatorioDeVendas();
-		System.out.println(relatorio);
+		System.out.println(pedido.getCliente().getNome());
 	}
 	
 	private static void popularBancoDeDados() {
