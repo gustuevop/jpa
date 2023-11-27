@@ -1,1 +1,5 @@
-Unexpected error.  File contents could not be restored from local history during undo/redo.
+Manifest-Version: 1.0
+Built-By: gustavo.simao
+Build-Jdk: 17.0.5
+Created-By: Maven Integration for Eclipse
+

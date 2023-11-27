@@ -35,9 +35,6 @@ public class CadastroDePedido {
 		pedidoDao.cadastrar(pedido);
 		
 		em.getTransaction().commit();
-		
-		System.out.println("\nValor Total: " + pedidoDao.valorTotalVendido());
-		
 	}
 	
 	private static void popularBancoDeDados() {
