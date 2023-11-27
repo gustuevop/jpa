@@ -1,6 +1,7 @@
 package br.com.alura.loja.testes;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -14,6 +15,7 @@ import br.com.alura.loja.modelo.ItemPedido;
 import br.com.alura.loja.modelo.Pedido;
 import br.com.alura.loja.modelo.Produto;
 import br.com.alura.loja.util.JPAUtil;
+import br.com.alura.loja.vo.RelatorioDeVendasVo;
 
 public class CadastroDePedido {
 
@@ -30,11 +32,15 @@ public class CadastroDePedido {
 		
 		Pedido pedido = new Pedido(cliente);
 		pedido.adicionarItem(new ItemPedido(10, pedido, produto));
+		pedido.adicionarItem(new ItemPedido(2, pedido, produto));
 		
 		PedidoDao pedidoDao = new PedidoDao(em);
 		pedidoDao.cadastrar(pedido);
 		
 		em.getTransaction().commit();
+		
+		List<RelatorioDeVendasVo> relatorio = pedidoDao.relatorioDeVendas();
+		System.out.println(relatorio);
 	}
 	
 	private static void popularBancoDeDados() {
