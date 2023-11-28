@@ -20,7 +20,7 @@ public class CadastroDeProduto {
 		
 		Produto p = produtoDao.buscarPorId(1l);
 
-		List<Produto> produtos = produtoDao.buscarProdutosPorParametros("Motorola", null, null);
+		List<Produto> produtos = produtoDao.buscarProdutosPorParametrosComCriteria("Motorola", null, null);
 		produtos.forEach(System.out::println);
 		
 	}
